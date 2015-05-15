@@ -20,7 +20,8 @@ class Welcome extends CI_Controller {
 	function __construct()
 	 {
 	   parent::__construct();
-	   $this->load->model('user','',TRUE);
+     $this->load->model('user','',TRUE);
+	   $this->load->model('baby','',TRUE);
 	   $this->load->model('event','',TRUE);
 	   if(!$this->session->userdata('logged_in'))
 		{
@@ -31,12 +32,12 @@ class Welcome extends CI_Controller {
 	public function index()
     {
         $data = array();
-        $data['total_events'] = $this->event->get_total_events();
-        $data['total_users'] = $this->user->get_total_users();
-        $data['latest_five_events'] = $this->event->get_latest_five_events();
-        $data['latest_five_users'] = $this->user->get_latest_five_users();
+        $data['total_parents'] = $this->user->get_total_users();
+        $data['total_babies'] = $this->baby->get_total_babies();
+        //$data['latest_five_events'] = $this->event->get_latest_five_events();
+        //$data['latest_five_users'] = $this->user->get_latest_five_users();
 
-		$content = $this->load->view('content.php', $data ,true);
+		    $content = $this->load->view('content.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
 	}
 
@@ -245,7 +246,7 @@ class Welcome extends CI_Controller {
            'longitude'     =>$longitude,
            );
 
-          if(isset($_FILES['image'])) 
+          if(isset($_FILES['image']))
           {
               if ( ! $this->upload->do_upload('image'))
               {
@@ -258,20 +259,20 @@ class Welcome extends CI_Controller {
                 $image = 'assets/uploads/'.$data['raw_name'].$data['file_ext'];
                 $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
 
-                
+
                 $path = substr($_SERVER['REQUEST_URI'],0,stripos($_SERVER['REQUEST_URI'], "index.php"));
-                $image = $protocol.$_SERVER['SERVER_NAME'].$path.$image;    
+                $image = $protocol.$_SERVER['SERVER_NAME'].$path.$image;
                 $params['image'] = $image;
-              }  
-          }  
-          
+              }
+          }
+
 
            if($error == "")
            {
-              $result = $this->event->edit_event($event_id,$params);  
+              $result = $this->event->edit_event($event_id,$params);
               redirect(base_url().'index.php/welcome/event_detail/'.$event_id);
-           } 
-                      
+           }
+
         }
         else
         {
@@ -352,10 +353,10 @@ class Welcome extends CI_Controller {
               $image = 'assets/uploads/'.$data['raw_name'].$data['file_ext'];
               $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
 
-              
+
               $path = substr($_SERVER['REQUEST_URI'],0,stripos($_SERVER['REQUEST_URI'], "index.php"));
-              $image = $protocol.$_SERVER['SERVER_NAME'].$path.$image;    
-              
+              $image = $protocol.$_SERVER['SERVER_NAME'].$path.$image;
+
             }
 
            $params       = array('name'=>$name,
@@ -375,9 +376,9 @@ class Welcome extends CI_Controller {
            {
               $event_id = $this->event->create_event($params);
 
-              redirect(base_url().'index.php/welcome/event_detail/'.$event_id);  
-           } 
-           
+              redirect(base_url().'index.php/welcome/event_detail/'.$event_id);
+           }
+
         }
         else
         {
@@ -386,7 +387,7 @@ class Welcome extends CI_Controller {
         }
 
 
-        
+
         $data['uniqid'] = $uniqid;
         //$data['detail'] = $this->event->get_event_detail($event_id);
         $content = $this->load->view('create_event.php', $data ,true);

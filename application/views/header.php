@@ -1,7 +1,7 @@
 <header class="header">
     <a href="<?php echo base_url();?>" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        WASL Admin
+        Dadone Admin
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">

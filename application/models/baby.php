@@ -1,29 +1,11 @@
 <?php
-Class User extends CI_Model
+Class Baby extends CI_Model
 {
- function login($username, $password)
+
+
+ function get_total_babies()
  {
-   $this -> db -> select('user_id, email, password');
-   $this -> db -> from('users');
-   $this -> db -> where('email', $username);
-   $this -> db -> where('password', MD5($password));
-   $this -> db -> limit(1);
-
-   $query = $this -> db -> get();
-
-   if($query -> num_rows() == 1)
-   {
-     return $query->result();
-   }
-   else
-   {
-     return false;
-   }
- }
-
- function get_total_users()
- {
-     return $this->db->count_all('users');
+     return $this->db->count_all('babies');
  }
 
 function get_user_detail($user_id)

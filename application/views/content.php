@@ -20,10 +20,10 @@
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3>
-                        <?php echo $total_events;?>
+                        <?php echo $total_parents;?>
                     </h3>
                     <p>
-                        Total Events
+                        Total Parents
                     </p>
                 </div>
                 <div class="icon">
@@ -58,10 +58,10 @@
             <div class="small-box bg-yellow">
                 <div class="inner">
                     <h3>
-                        <?php echo $total_users;?>
+                        <?php echo $total_babies;?>
                     </h3>
                     <p>
-                        Total Users
+                        Total Babies
                     </p>
                 </div>
                 <div class="icon">
@@ -97,7 +97,7 @@
                         <div class="col-md-6">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Latest Five Events</h3>
+                                    <h3 class="box-title">Latest Parent Profile</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body no-padding">
                                     <table class="table table-condensed">
@@ -139,7 +139,7 @@
                         <div class="col-md-6">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Latest Five Users</h3>
+                                    <h3 class="box-title">Latest Babies Profile</h3>
 
                                 </div><!-- /.box-header -->
                                 <div class="box-body no-padding">
