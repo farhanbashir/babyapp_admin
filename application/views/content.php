@@ -29,9 +29,9 @@
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <!-- <a href="#" class="small-box-footer">
                     More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+                </a> -->
             </div>
         </div><!-- ./col -->
         <div class="col-lg-3 col-xs-6">
@@ -67,9 +67,9 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <!-- <a href="#" class="small-box-footer">
                     More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+                </a> -->
             </div>
         </div><!-- ./col -->
         <div class="col-lg-3 col-xs-6">
@@ -103,29 +103,29 @@
                                     <table class="table table-condensed">
                                         <tbody><tr>
                                             <th style="width: 10px">#</th>
-                                            <th>Task</th>
-                                            <th>Start Date</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
                                             <th>Status</th>
-                                            <th style="width: 40px">View</th>
+                                            <!-- <th style="width: 40px">View</th> -->
                                         </tr>
                                         <?php
                                         $i=0;
-                                        foreach($latest_five_events as $event)
+                                        foreach($latest_five_parents as $parent)
                                         {
                                             $i++;
                                         ?>
                                         <tr>
                                             <td><?php echo $i;?></td>
-                                            <td><?php echo $event['name'];?></td>
-                                            <td><?php echo date('F j, Y',strtotime($event['start_date']));?></td>
+                                            <td><?php echo ucfirst($parent['first_name'].' '.$parent['last_name']);?></td>
+                                            <td><?php echo $parent['email'];?></td>
                                             <td>
                                                 <?php
-                                                    echo ($event['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                                    echo ($parent['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <a href="<?php echo base_url();?>/index.php/welcome/event_detail/<?php echo $event['id'];?>">View</a>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         <?php
                                         }
@@ -147,28 +147,28 @@
                                         <tbody><tr>
                                             <th style="width: 10px">#</th>
                                             <th>Name</th>
-                                            <th>Company Name</th>
-                                            <th>Status</th>
-                                            <th style="width: 40px">View</th>
+                                            <th>Date of Birth</th>
+                                            <th>Gender</th>
+                                            <!-- <th style="width: 40px">View</th> -->
                                         </tr>
                                         <?php
                                         $i=0;
-                                        foreach($latest_five_users as $user)
+                                        foreach($latest_five_babies as $baby)
                                         {
                                             $i++;
                                         ?>
                                         <tr>
                                             <td><?php echo $i;?></td>
-                                            <td><?php echo ucfirst($user['first_name'].' '.$user['last_name']);?></td>
-                                            <td><?php echo $user['company_name'];?></td>
+                                            <td><?php echo ucfirst($baby['first_name']);?></td>
+                                            <td><?php echo date("F j,Y",strtotime($baby['dob']));?></td>
                                             <td>
                                                 <?php
-                                                    echo ($user['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                                    echo ($baby['gender'] == 1) ? "Female" : "Male";
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <a href="<?php echo base_url();?>/index.php/welcome/user_detail/<?php echo $user['id'];?>">View</a>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         <?php
                                         }

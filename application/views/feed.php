@@ -1,7 +1,6 @@
-
 <section class="content-header">
     <h1>
-        Events
+        Feeds
 <!--        <small>preview of simple tables</small>-->
     </h1>
 <!--
@@ -33,35 +32,39 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Address</th>
-                            <th>Creator</th>
-                            <th>Status</th>
-                            <th>Description</th>
+                            <th>Start Month</th>
+                            <th>End Month</th>
+                            <th>Feed</th>
+                            <th>Feed Arabic</th>
+                            <th>Intro</th>
+                            <th>Intro Arabic</th>
+                            <th>Milestone</th>
+                            <!-- <th>Status</th>
+                            <th>Description</th> -->
                             <th>Action</th>
                         </tr>
                         <?php
-                        foreach($events as $event)
+                        foreach($feeds as $feed)
                         {
                         ?>
                         <tr>
-                            <td><?php echo $event['name'];?></td>
-                            <td><?php echo $event['start_date'];?></td>
-                            <td><?php echo $event['end_date'];?></td>
-                            <td><?php echo $event['address'];?></td>
-                            <td><?php echo $event['first_name'].' '.$event['last_name'];?></td>
-                            <td>
+                            <td><?php echo $feed['from'];?></td>
+                            <td><?php echo $feed['to'];?></td>
+                            <td><?php echo $feed['feed'];?></td>
+                            <td><?php echo $feed['feed_ar'];?></td>
+                            <td><?php echo $feed['intro'];?></td>
+                            <td><?php echo $feed['intro_ar'];?></td>
+                            <td><?php echo $feed['milestone_name'];?></td>
+                            <!-- <td>
                                 <?php
-                                    echo ($event['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                    echo ($feed['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
                                 ?>
                             </td>
-                            <td><?php echo $event['description'];?></td>
+                            <td><?php echo $feed['description'];?></td> -->
                             <td>
-                                <a href="<?php echo base_url();?>/index.php/welcome/event_detail/<?php echo $event['id'];?>">View</a>
+                                <a href="<?php echo base_url();?>/index.php/welcome/feed_detail/<?php echo $feed['feed_id'];?>">View</a>
                                 &nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo base_url();?>/index.php/welcome/edit_event/<?php echo $event['id'];?>">Edit</a>
+                                <a href="<?php echo base_url();?>/index.php/welcome/edit_feed/<?php echo $feed['feed_id'];?>">Edit</a>
                             </td>
                         </tr>
                         <?php

@@ -44,7 +44,7 @@
                 <i class="fa fa-dashboard"></i> <span>Events</span>
             </a>
         </li> -->
-        <li class="treeview">
+        <!-- <li class="treeview">
             <a href="#">
                 <i class="fa fa-edit"></i> <span>Users</span>
                 <i class="fa pull-right fa-angle-down"></i>
@@ -53,6 +53,6 @@
                 <li><a href="<?php echo site_url('welcome/parents') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Parents</a></li>
                 <li><a href="<?php echo site_url('welcome/babies') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Babies</a></li>
             </ul>
-        </li>
+        </li> -->
     </ul>
 </section>

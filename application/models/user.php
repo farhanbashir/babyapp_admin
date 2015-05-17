@@ -6,6 +6,7 @@ Class User extends CI_Model
    $this -> db -> select('user_id, email, password');
    $this -> db -> from('users');
    $this -> db -> where('email', $username);
+   $this -> db -> where('is_admin', 1);
    $this -> db -> where('password', MD5($password));
    $this -> db -> limit(1);
 
@@ -37,7 +38,7 @@ function get_user_detail($user_id)
 
 function get_admin()
 {
-    $sql = "select * from users where username='admin@dadone.com'" ;
+    $sql = "select * from users where email='admin@dadone.com'" ;
     $query = $this->db->query($sql);
     $result = $query->result_array();
     $query->free_result();
@@ -53,7 +54,7 @@ function get_admin()
      return $result;
  }
 
- function get_latest_five_users()
+ function get_latest_five_parents()
  {
     $sql = "select * from users where is_admin=0 order by user_id desc limit 5";
     $query = $this->db->query($sql);

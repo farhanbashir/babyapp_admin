@@ -35,7 +35,7 @@ function get_admin()
      return $result;
  }
 
- function get_latest_five_users()
+ function get_latest_five_babies()
  {
     $sql = "select * from users where is_admin=0 order by user_id desc limit 5";
     $query = $this->db->query($sql);
