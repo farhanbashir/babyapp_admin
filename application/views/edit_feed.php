@@ -55,10 +55,6 @@
                                             <textarea class="form-control" id="feed" name="feed" rows="3" placeholder="Enter ..."><?php echo $detail['feed'];?></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="end_date">Feed</label>
-                                            <textarea class="form-control" id="feed" name="feed" rows="3" placeholder="Enter ..."><?php echo $detail['feed'];?></textarea>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="end_date">Feed Arabic</label>
                                             <textarea class="form-control" id="feed_ar" name="feed_ar" rows="3" placeholder="Enter ..."><?php echo $detail['feed_ar'];?></textarea>
                                         </div>
@@ -84,49 +80,28 @@
 </section><!-- /.content -->
 <script>
 function check_edit_feed()
-{return true;
+{
     var count = 0;
 
-    if($('#name').val() == '')
+    if($('#feed').val() == '')
     {
         count++;
-        $('#name').parent().addClass('has-error');
+        $('#feed').parent().addClass('has-error');
     }
-
-    if($('#address').val() == '')
+    if($('#feed_ar').val() == '')
     {
         count++;
-        $('#address').parent().addClass('has-error');
+        $('#feed_ar').parent().addClass('has-error');
     }
-
-    if($('#latitude').val() == '')
+    if($('#intro').val() == '')
     {
         count++;
-        $('#latitude').parent().addClass('has-error');
+        $('#intro').parent().addClass('has-error');
     }
-
-    if($('#longitude').val() == '')
+    if($('#intro_ar').val() == '')
     {
         count++;
-        $('#longitude').parent().addClass('has-error');
-    }
-
-    if($('#start_date').val() == '')
-    {
-        count++;
-        $('#start_date').parent().addClass('has-error');
-    }
-
-    if($('#end_date').val() == '')
-    {
-        count++;
-        $('#end_date').parent().addClass('has-error');
-    }
-
-    if($('#description').val() == '')
-    {
-        count++;
-        $('#description').parent().addClass('has-error');
+        $('#intro_ar').parent().addClass('has-error');
     }
 
 
