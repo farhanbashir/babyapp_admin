@@ -3,25 +3,33 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <p class="lead"><?php echo ucfirst($detail['first_name'].' '.$detail['last_name']);?></p>
+            <p class="lead"><?php echo ucfirst($detail['first_name']);?></p>
             <div class="table-responsive">
                 <table class="table">
                     <tbody>
                         <tr>
                             <th>Id:</th>
-                            <td><?php echo $detail['user_id'];?></td>
+                            <td><?php echo $detail['baby_id'];?></td>
+                        </tr>
+                        <tr>
+                            <th>Parent:</th>
+                            <td><a href="<?php echo base_url();?>/index.php/welcome/parent_detail/<?php echo $detail['user_id'];?>"><?php echo $detail['parent'];?></a></td>
                         </tr>
                         <tr>
                             <th style="width:30%">First Name:</th>
                             <td><?php echo $detail['first_name'];?></td>
                         </tr>
                         <tr>
-                            <th>Last Name:</th>
-                            <td><?php echo $detail['last_name'];?></td>
+                            <th>Birth Date:</th>
+                            <td><?php echo $detail['dob'];?></td>
                         </tr>
                         <tr>
-                            <th>Email:</th>
-                            <td><?php echo $detail['email'];?></td>
+                            <th>Height:</th>
+                            <td><?php echo $detail['height'];?></td>
+                        </tr>
+                        <tr>
+                            <th>Weight:</th>
+                            <td><?php echo $detail['weight'];?></td>
                         </tr>
                         <tr>
                             <th>Gender:</th>
@@ -30,18 +38,6 @@
                                     echo ($detail['gender'] == 0) ? "Male" : "Female";
                                 ?>
                             </td>
-                        </tr>
-                        <tr>
-                            <th>Status:</th>
-                            <td>
-                                <?php
-                                    echo ($detail['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Date of Birth:</th>
-                            <td><?php echo $detail['dob'];?></td>
                         </tr>
                         <!-- <tr>
                             <?php

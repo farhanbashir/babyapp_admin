@@ -8,27 +8,23 @@ Class Baby extends CI_Model
      return $this->db->count_all('babies');
  }
 
-function get_user_detail($user_id)
+function get_baby_detail($baby_id)
 {
-    $sql = "select * from users where user_id=$user_id" ;
+    $sql = "select b.*, concat(u.first_name,' ',u.last_name) as parent from babies b 
+            inner join users u on u.user_id=b.user_id
+             where baby_id=$baby_id" ;
     $query = $this->db->query($sql);
     $result = $query->result_array();
     $query->free_result();
     return $result[0];
 }
 
-function get_admin()
-{
-    $sql = "select * from users where username='admin@dadone.com'" ;
-    $query = $this->db->query($sql);
-    $result = $query->result_array();
-    $query->free_result();
-    return $result[0];
-}
 
- function get_users()
+ function get_babies()
  {
-     $sql = "select * from users order by user_id desc" ;
+     $sql = "select b.*, concat(u.first_name,' ',u.last_name) as parent from babies b 
+            inner join users u on u.user_id=b.user_id
+            order by baby_id desc" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
      $query->free_result();

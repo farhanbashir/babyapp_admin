@@ -42,7 +42,7 @@ class Welcome extends CI_Controller {
         $this->load->view('welcome_message', array('content' => $content));
 	}
 
-    public function user()
+    public function parents()
     {
         $users = $this->user->get_users();
         $data = array();
@@ -51,7 +51,7 @@ class Welcome extends CI_Controller {
         $this->load->view('welcome_message', array('content' => $content));
     }
 
-    public function user_detail($user_id)
+    public function parent_detail($user_id)
     {
         $data = array();
         $data['detail'] = $this->user->get_user_detail($user_id);
@@ -77,6 +77,23 @@ class Welcome extends CI_Controller {
         $this->load->view('welcome_message', array('content' => $content));
     }
 
+    public function babies()
+    {
+        $babies = $this->baby->get_babies();
+        $data = array();
+        $data['babies'] = $babies;
+        $content = $this->load->view('babies.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
+
+    public function baby_detail($baby_id)
+    {
+        $data = array();
+        $data['detail'] = $this->baby->get_baby_detail($baby_id);
+        $content = $this->load->view('baby_detail.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
+
 	public function login()
 	{
 		$this->load->view("login");
@@ -94,8 +111,7 @@ class Welcome extends CI_Controller {
         $error = "";
         $message = "";
         $admin = $this->user->get_admin();
-        $this->load->library('form_validation');
-
+        
         if($feed_id == "")
             redirect(base_url());
         else
@@ -165,7 +181,81 @@ class Welcome extends CI_Controller {
         $this->load->view('welcome_message', array('content' => $content));
     }
 
-    
+    function create_feed()
+    {
+        $data = array();
+
+        $message = "";
+        $admin = $this->user->get_admin();
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('from', 'from', 'trim|required');
+        $this->form_validation->set_rules('to', 'to', 'trim|required');
+        $this->form_validation->set_rules('feed', 'Feed', 'trim|required');
+        $this->form_validation->set_rules('intro', 'Intro', 'trim|required');
+        $this->form_validation->set_rules('feed_ar', 'Feed Arabic', 'trim|required');
+        $this->form_validation->set_rules('intro_ar', 'Intro Arabic', 'trim|required');
+        $this->form_validation->set_rules('milestone_id', 'Milestone', 'trim|required');
+
+        $data['error'] = "";
+        if ($this->form_validation->run())
+        {
+           // Form was submitted and there were no errors
+           $from        = $this->input->post('from');
+           $to     = $this->input->post('to');
+           $feed  = $this->input->post('feed', true);
+           $intro    = $this->input->post('intro', true);
+           $feed_ar    = $this->input->post('feed_ar', true);
+           $intro_ar = $this->input->post('intro_ar', true);
+           $milestone_id = $this->input->post('milestone_id');
+           
+
+           $uniqid = $this->input->post('uniqid');
+           //$service_id = (int) $this->input->post('service_id');
+
+           $params       = array('from'=>$from,
+           'to'     =>$to,
+           'feed'  =>$feed,
+           'intro' =>$intro,
+           'feed_ar'    =>$feed_ar,
+           'intro_ar'    =>$intro_ar,
+           'milestone_id'     =>$milestone_id
+           
+           );
+
+          $feed_id = $this->feed->create_feed($params);
+
+          redirect(base_url().'index.php/welcome/feed_detail/'.$feed_id);  
+
+           
+
+           
+        }
+        else
+        {
+            $is_submit = ($this->input->post('is_submit')) ? $this->input->post('is_submit') : 0;
+            $uniqid = ($this->input->post('uniqid')) ? $this->input->post('uniqid') : uniqid();
+        }
+
+
+        
+        $data['uniqid'] = $uniqid;
+        $data['milestones'] = $this->milestone->get_milestones();
+        $content = $this->load->view('create_feed.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
+
+    function deactivate_feed($feed_id)
+    {
+        $this->feed->deactivate_feed($feed_id);
+        redirect(base_url());
+    }
+
+    function activate_feed($feed_id)
+    {
+        $this->feed->activate_feed($feed_id);
+        redirect(base_url());
+    }
 
 }
 

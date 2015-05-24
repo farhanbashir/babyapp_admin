@@ -1,7 +1,7 @@
 
 <section class="content-header">
     <h1>
-        Parents
+        Babies
 <!--        <small>preview of simple tables</small>-->
     </h1>
 <!--
@@ -35,35 +35,31 @@
                         <tr>
                             <th>Id</th>
                             <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Gender</th>
+                            <th>Parent</th>
                             <th>Birth Date</th>
-                            <th>Status</th>
+                            <th>Height</th>
+                            <th>Weight</th>
+                            <th>Gender</th>
                             <th>Action</th>
                         </tr>
                         <?php
-                        foreach($users as $user)
+                        foreach($babies as $baby)
                         {
                         ?>
                         <tr>
-                            <td><?php echo $user['user_id'];?></td>
-                            <td><?php echo $user['first_name'];?></td>
-                            <td><?php echo $user['last_name'];?></td>
-                            <td><?php echo $user['email'];?></td>
+                            <td><?php echo $baby['baby_id'];?></td>
+                            <td><?php echo $baby['first_name'];?></td>
+                            <td><?php echo $baby['parent'];?></td>
+                            <td><?php echo $baby['dob'];?></td>
+                            <td><?php echo $baby['height'];?></td>
+                            <td><?php echo $baby['weight'];?></td>
                             <td>
                                 <?php
-                                    echo ($user['gender'] == 0) ? "Male" : "Female";
-                                ?>
-                            </td>
-                            <td><?php echo $user['dob'];?></td>
-                            <td>
-                                <?php
-                                    echo ($user['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                    echo ($baby['gender'] == 0) ? "Male" : "Female";
                                 ?>
                             </td>
                             <td>
-                                <a href="<?php echo base_url();?>/index.php/welcome/parent_detail/<?php echo $user['user_id'];?>">View</a>
+                                <a href="<?php echo base_url();?>/index.php/welcome/baby_detail/<?php echo $baby['baby_id'];?>">View</a>
                             </td>
                         </tr>
                         <?php

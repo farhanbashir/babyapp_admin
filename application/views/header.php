@@ -1,7 +1,8 @@
 <header class="header">
     <a href="<?php echo base_url();?>" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        Dadone Admin
+        Danonne Admin
+        <!-- <img src="<?php echo asset_img('logo.png');?>" class="img-circle" alt="User Image" /> -->
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">

@@ -47,7 +47,7 @@ function get_admin()
 
  function get_users()
  {
-     $sql = "select * from users order by user_id desc" ;
+     $sql = "select * from users where is_admin=0 order by user_id desc" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
      $query->free_result();

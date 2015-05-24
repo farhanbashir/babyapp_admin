@@ -37,6 +37,26 @@ function get_feed_detail($feed_id)
     return ($this->db->affected_rows() != 1) ? false : true;
  }
 
+ function create_feed($data)
+ {
+    $this->db->insert('feeds',$data);
+    return $this->db->insert_id();
+    //return ($this->db->affected_rows() != 1) ? false : true;
+ }
+
+ function deactivate_feed($feed_id)
+ {
+    $sql = "update feeds set is_active=0 where feed_id=$feed_id";
+    $query = $this->db->query($sql);
+
+ }
+
+ function activate_feed($feed_id)
+ {
+    $sql = "update feeds set is_active=1 where feed_id=$feed_id";
+    $query = $this->db->query($sql);
+
+ }
  
 }
 ?>

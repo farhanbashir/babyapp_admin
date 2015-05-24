@@ -29,17 +29,32 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
-        <!-- <li class="active">
-            <a href="<?php echo site_url('welcome/user') ?>">
-                <i class="fa fa-dashboard"></i> <span>Users</span>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>Users</span>
+                <i class="fa pull-right fa-angle-down"></i>
             </a>
-        </li> -->
-        <li class="active">
+            <ul class="treeview-menu" style="display: block;">
+                <li><a href="<?php echo site_url('welcome/parents') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Parents List</a></li>
+                <li><a href="<?php echo site_url('welcome/babies') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Babies List</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>Feeds</span>
+                <i class="fa pull-right fa-angle-down"></i>
+            </a>
+            <ul class="treeview-menu" style="display: block;">
+                <li><a href="<?php echo site_url('welcome/feeds') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Feeds List</a></li>
+                <li><a href="<?php echo site_url('welcome/create_feed') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Create Feed</a></li>
+            </ul>
+        </li>
+        <!-- <li class="active">
             <a href="<?php echo site_url('welcome/feeds') ?>">
                 <i class="fa fa-dashboard"></i> <span>Feeds</span>
             </a>
         </li>
-        <!-- <li class="active">
+        <li class="active">
             <a href="<?php echo site_url('welcome/event') ?>">
                 <i class="fa fa-dashboard"></i> <span>Events</span>
             </a>

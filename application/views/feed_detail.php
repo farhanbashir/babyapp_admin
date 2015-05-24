@@ -36,7 +36,25 @@
                             <td><?php echo $detail['intro_ar'];?></td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <?php
+                            if($detail['is_active'] == 1)
+                            {
+                            ?>
+                            <td>
+                                <button onclick="confirm_deactive();" class="btn btn-danger">Deactivate Feed</button>
+                            </td>
+                            <?php
+                            }
+                            else
+                            {
+                            ?>
+                            <td>
+                                <button onclick="confirm_active();" class="btn btn-success">Activate Feed</button>
+                            </td>
+                            <?php
+                            }
+                            ?>
+                            <td>
                                 <a href="<?php echo base_url();?>/index.php/welcome/edit_feed/<?php echo $detail['feed_id'];?>" class="btn btn-success">Edit Feed</a>
                             </td>
                         </tr>
@@ -48,9 +66,9 @@
 <script>
 function confirm_deactive()
 {
-    var url = '<?php echo base_url();?>/index.php/welcome/deactivate_event/<?php echo $detail['id'];?>';
+    var url = '<?php echo base_url();?>/index.php/welcome/deactivate_feed/<?php echo $detail['feed_id'];?>';
 
-    var r = confirm("Are you sure you want to deactivate this event?");
+    var r = confirm("Are you sure you want to deactivate this feed?");
     if (r == true) {
         window.location = url;
     } else {
@@ -60,9 +78,9 @@ function confirm_deactive()
 
 function confirm_active()
 {
-    var url = '<?php echo base_url();?>/index.php/welcome/activate_event/<?php echo $detail['id'];?>';
+    var url = '<?php echo base_url();?>/index.php/welcome/activate_feed/<?php echo $detail['feed_id'];?>';
 
-    var r = confirm("Are you sure you want to activate this event?");
+    var r = confirm("Are you sure you want to activate this feed?");
     if (r == true) {
         window.location = url;
     } else {
