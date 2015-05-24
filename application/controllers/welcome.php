@@ -105,13 +105,13 @@ class Welcome extends CI_Controller {
         redirect(base_url());
     }
 
-    
+
     function edit_feed($feed_id)
     {
         $error = "";
         $message = "";
         $admin = $this->user->get_admin();
-        
+
         if($feed_id == "")
             redirect(base_url());
         else
@@ -128,7 +128,7 @@ class Welcome extends CI_Controller {
         $this->form_validation->set_rules('feed_ar', 'Feed Arabic', 'trim|required');
         $this->form_validation->set_rules('intro_ar', 'Intro Arabic', 'trim|required');
         $this->form_validation->set_rules('milestone_id', 'Milestone', 'trim|required');
-        
+
         if ($this->form_validation->run())
         {
            // Form was submitted and there were no errors
@@ -139,7 +139,7 @@ class Welcome extends CI_Controller {
            $feed_ar    = $this->input->post('feed_ar', true);
            $intro_ar = $this->input->post('intro_ar', true);
            $milestone_id = $this->input->post('milestone_id');
-           
+
 
            $uniqid = $this->input->post('uniqid');
            //$service_id = (int) $this->input->post('service_id');
@@ -151,10 +151,10 @@ class Welcome extends CI_Controller {
            'feed_ar'    =>$feed_ar,
            'intro_ar'    =>$intro_ar,
            'milestone_id'     =>$milestone_id
-           
+
            );
 
-          
+
 
            if($error == "")
            {
@@ -208,7 +208,7 @@ class Welcome extends CI_Controller {
            $feed_ar    = $this->input->post('feed_ar', true);
            $intro_ar = $this->input->post('intro_ar', true);
            $milestone_id = $this->input->post('milestone_id');
-           
+
 
            $uniqid = $this->input->post('uniqid');
            //$service_id = (int) $this->input->post('service_id');
@@ -220,16 +220,16 @@ class Welcome extends CI_Controller {
            'feed_ar'    =>$feed_ar,
            'intro_ar'    =>$intro_ar,
            'milestone_id'     =>$milestone_id
-           
+
            );
 
           $feed_id = $this->feed->create_feed($params);
 
-          redirect(base_url().'index.php/welcome/feed_detail/'.$feed_id);  
+          redirect(base_url().'index.php/welcome/feed_detail/'.$feed_id);
 
-           
 
-           
+
+
         }
         else
         {
@@ -238,7 +238,7 @@ class Welcome extends CI_Controller {
         }
 
 
-        
+
         $data['uniqid'] = $uniqid;
         $data['milestones'] = $this->milestone->get_milestones();
         $content = $this->load->view('create_feed.php', $data ,true);
@@ -248,13 +248,13 @@ class Welcome extends CI_Controller {
     function deactivate_feed($feed_id)
     {
         $this->feed->deactivate_feed($feed_id);
-        redirect(base_url());
+        redirect(base_url().'/index.php/welcome/feed_detail/'.$feed_id);
     }
 
     function activate_feed($feed_id)
     {
         $this->feed->activate_feed($feed_id);
-        redirect(base_url());
+        redirect(base_url().'/index.php/welcome/feed_detail/'.$feed_id);
     }
 
 }
