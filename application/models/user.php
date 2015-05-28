@@ -38,7 +38,7 @@ function get_user_detail($user_id)
 
 function get_admin()
 {
-    $sql = "select * from users where email='admin@dadone.com'" ;
+    $sql = "select * from users where email='admin@danone.com'" ;
     $query = $this->db->query($sql);
     $result = $query->result_array();
     $query->free_result();

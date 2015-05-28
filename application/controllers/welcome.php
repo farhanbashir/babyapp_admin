@@ -110,7 +110,7 @@ class Welcome extends CI_Controller {
     {
         $error = "";
         $message = "";
-        $admin = $this->user->get_admin();
+        //$admin = $this->user->get_admin();
 
         if($feed_id == "")
             redirect(base_url());
@@ -186,7 +186,7 @@ class Welcome extends CI_Controller {
         $data = array();
 
         $message = "";
-        $admin = $this->user->get_admin();
+        //$admin = $this->user->get_admin();
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('from', 'from', 'trim|required');
