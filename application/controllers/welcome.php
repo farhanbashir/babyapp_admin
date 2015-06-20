@@ -23,7 +23,9 @@ class Welcome extends CI_Controller {
      $this->load->model('user','',TRUE);
 	   $this->load->model('baby','',TRUE);
      $this->load->model('feed','',TRUE);
-	   $this->load->model('milestone','',TRUE);
+     $this->load->model('milestone','',TRUE);
+     $this->load->model('device','',TRUE);
+	   $this->load->model('message','',TRUE);
 	   if(!$this->session->userdata('logged_in'))
 		{
 			redirect(base_url());
@@ -99,11 +101,80 @@ class Welcome extends CI_Controller {
 		$this->load->view("login");
 	}
 
-    public function logout()
-    {
-        $this->session->sess_destroy();
-        redirect(base_url());
-    }
+  public function logout()
+  {
+      $this->session->sess_destroy();
+      redirect(base_url());
+  }
+
+  public function messages()
+  {
+      $messages = $this->message->get_messages();
+      $data = array();
+      $data['messages'] = $messages;
+      $content = $this->load->view('message.php', $data ,true);
+      $this->load->view('welcome_message', array('content' => $content));
+  }
+
+  public function send_message()
+  {
+    $data = array();
+
+        $message = "";
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('message', 'message', 'trim|required');
+        
+        $data['error'] = "";
+        if ($this->form_validation->run())
+        {
+           // Form was submitted and there were no errors
+           $message = $this->input->post('message');
+           
+
+           $uniqid = $this->input->post('uniqid');
+           //$service_id = (int) $this->input->post('service_id');
+
+           $params       = array('date'=>date("Y-m-d"),'message'=>$message);
+
+          $message_id = $this->message->create_message($params);
+
+          redirect(base_url().'index.php/welcome/messages');
+
+
+
+
+        }
+        else
+        {
+            $is_submit = ($this->input->post('is_submit')) ? $this->input->post('is_submit') : 0;
+            $uniqid = ($this->input->post('uniqid')) ? $this->input->post('uniqid') : uniqid();
+        }
+
+
+
+        $data['uniqid'] = $uniqid;
+        $content = $this->load->view('create_message.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    // set_time_limit(0);
+    // $message = "how are you";
+    // $id = "APA91bFuM4vc4PfgYsffQRiHPfaBC5CqF7GPlm-1i8LYx8Fl-A3CDAyqkOtmiSMpESQDQ5qBqrxJiHxLehbS7IgMmtxVEZCaKaHUCOxMFCIHQJDuxChIbCJLCkJZOOA14cUgIaGE-q9j";
+    // send_notification_android(array($id), array("message"=>$message));
+    // $devices = $this->device->get_devices();
+    // foreach($devices as $device)
+    // {
+    //   if($device['type'] == 0)
+    //   {
+    //     send_notification_iphone($device['uid'], $message);
+        
+    //   } 
+    //   else
+    //   {
+    //     send_notification_android($device['uid'], $message);
+    //   } 
+    // }  
+    
+  }
 
 
     function edit_feed($feed_id)

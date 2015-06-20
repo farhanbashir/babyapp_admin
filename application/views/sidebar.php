@@ -49,12 +49,17 @@
                 <li><a href="<?php echo site_url('welcome/create_feed') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Create Feed</a></li>
             </ul>
         </li>
-        <!-- <li class="active">
-            <a href="<?php echo site_url('welcome/feeds') ?>">
-                <i class="fa fa-dashboard"></i> <span>Feeds</span>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>Messages</span>
+                <i class="fa pull-right fa-angle-down"></i>
             </a>
+            <ul class="treeview-menu" style="display: block;">
+                <li><a href="<?php echo site_url('welcome/messages') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Messages List</a></li>
+                <li><a href="<?php echo site_url('welcome/send_message') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Send Message</a></li>
+            </ul>
         </li>
-        <li class="active">
+        <!-- <li class="active">
             <a href="<?php echo site_url('welcome/event') ?>">
                 <i class="fa fa-dashboard"></i> <span>Events</span>
             </a>

@@ -1,9 +1,9 @@
 <?php
 
 function send_notification_android($registatoin_ids, $message) {
-
+$CI =& get_instance();
         // Set POST variables
-        $url = $this->config->item("REMOTE_SOCKET_GOOGLE");
+        $url = $CI->config->item("REMOTE_SOCKET_GOOGLE");
 
         $fields = array(
             'registration_ids' => $registatoin_ids,
@@ -12,7 +12,7 @@ function send_notification_android($registatoin_ids, $message) {
 
     //print_r($fields);die;
         $headers = array(
-            'Authorization: key=' . $this->config->item('google_key'),
+            'Authorization: key=' . $CI->config->item('google_key'),
             'Content-Type: application/json'
         );
         // Open connection
@@ -38,20 +38,20 @@ function send_notification_android($registatoin_ids, $message) {
 
         // Close connection
         curl_close($ch);
-        //echo $result;
+        echo $result;
     }
 
     function send_notification_iphone($deviceToken, $message, $sound='default')
     {
-
+        $CI =& get_instance();
         //$deviceToken = '7229e0f7cc34bd639a31e81802def2c02945b0a89d01ce52c7528f8671ef8f32';
 
         // Put your private key's passphrase here:
         //$passphrase = 'developmentc2gapns';
 
-        $passphrase = $this->config->item('PASS_PHRASE');
+        $passphrase = $CI->config->item('PASS_PHRASE');
 
-        $remote_url = $this->config->item('REMOTE_SOCKET_APPLE');
+        $remote_url = $CI->config->item('REMOTE_SOCKET_APPLE');
 
         // Put your alert message here:
         //$message = 'Helo this is first message.';
@@ -61,7 +61,7 @@ function send_notification_android($registatoin_ids, $message) {
         $ctx = stream_context_create();
 
         //stream_context_set_option($ctx, 'ssl', 'local_cert', 'apns-dev.pem');
-        stream_context_set_option($ctx, 'ssl', 'local_cert', 'ck.pem');
+        stream_context_set_option($ctx, 'ssl', 'local_cert', asset_url("files/apns-dev-cert.pem"));
         //stream_context_set_option($ctx, 'ssl', 'local_cert', 'ck.pem');
         stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
 
