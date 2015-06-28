@@ -30,6 +30,24 @@ function get_feed_detail($feed_id)
      return $result;
  }
 
+ function get_feed_for_month($month)
+ {
+    $sql = "select * from feeds where `to`=$month and is_active=1" ;
+     $query = $this->db->query($sql);
+     $result = $query->result_array();
+     $query->free_result();
+     if(count($result) > 0)
+     {
+        return $result[0];   
+     }
+     else
+     {
+        return false;
+     }   
+     
+
+ }
+
  function edit_feed($feed_id,$data)
  {
     $this->db->where('feed_id', $feed_id);

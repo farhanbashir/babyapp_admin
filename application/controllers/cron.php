@@ -14,6 +14,7 @@ class Cron extends CI_Controller {
 		set_time_limit(0);
 
 		$this->load->model('baby','',TRUE);
+		$this->load->model('feed','',TRUE);
 		$babies = $this->baby->get_babies();
 
 		foreach($babies as $baby)
@@ -25,10 +26,25 @@ class Cron extends CI_Controller {
 			if($interval->d == 0)
 			{
 				$total_months = ($interval->y *12) + $interval->m;
-				debug($total_months);
+				
 				//get feed
-
-				//send notification
+				$feed = $this->feed->get_feed_for_month($total_months);
+				
+				if(is_array($feed))
+				{
+					debug($feed['feed'],1);
+					//send notification
+					if($baby['type'] == 0)
+		            {
+		              send_notification_iphone($baby['uid'], $feed['feed']);
+		              
+		            } 
+		            else
+		            {
+		              send_notification_android($baby['uid'], $feed['feed']);
+		            }	
+				}	
+				
 			}
 
 		}

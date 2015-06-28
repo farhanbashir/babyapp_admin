@@ -118,7 +118,8 @@ class Welcome extends CI_Controller {
 
   public function send_message()
   {
-    $data = array();
+        set_time_limit(0);
+        $data = array();
 
         $message = "";
         $this->load->library('form_validation');
@@ -139,6 +140,20 @@ class Welcome extends CI_Controller {
 
           $message_id = $this->message->create_message($params);
 
+          $devices = $this->device->get_devices();
+          foreach($devices as $device)
+          {
+            if($device['type'] == 0)
+            {
+              send_notification_iphone($device['uid'], $message);
+              
+            } 
+            else
+            {
+              send_notification_android($device['uid'], $message);
+            } 
+          }  
+
           redirect(base_url().'index.php/welcome/messages');
 
 
@@ -156,23 +171,11 @@ class Welcome extends CI_Controller {
         $data['uniqid'] = $uniqid;
         $content = $this->load->view('create_message.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
-    // set_time_limit(0);
+    
     // $message = "how are you";
     // $id = "APA91bFuM4vc4PfgYsffQRiHPfaBC5CqF7GPlm-1i8LYx8Fl-A3CDAyqkOtmiSMpESQDQ5qBqrxJiHxLehbS7IgMmtxVEZCaKaHUCOxMFCIHQJDuxChIbCJLCkJZOOA14cUgIaGE-q9j";
     // send_notification_android(array($id), array("message"=>$message));
-    // $devices = $this->device->get_devices();
-    // foreach($devices as $device)
-    // {
-    //   if($device['type'] == 0)
-    //   {
-    //     send_notification_iphone($device['uid'], $message);
-        
-    //   } 
-    //   else
-    //   {
-    //     send_notification_android($device['uid'], $message);
-    //   } 
-    // }  
+    
     
   }
 
