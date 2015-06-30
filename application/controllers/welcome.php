@@ -46,8 +46,20 @@ class Welcome extends CI_Controller {
 
     public function parents()
     {
-        $users = $this->user->get_users();
         $data = array();
+        $this->load->library("pagination");
+        $total_rows = $this->user->get_total_users();
+
+        $pagination_config = get_pagination_config('parents', $total_rows, $this->config->item('pagination_limit'), 3);
+
+        $this->pagination->initialize($pagination_config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+        $users = $this->user->get_users($page);
+        
         $data['users'] = $users;
         $content = $this->load->view('users.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
@@ -72,8 +84,19 @@ class Welcome extends CI_Controller {
 
     public function feeds()
     {
-        $feeds = $this->feed->get_feeds();
         $data = array();
+        $this->load->library("pagination");
+        $total_rows = $this->feed->get_total_feeds();
+
+        $pagination_config = get_pagination_config('feeds', $total_rows, $this->config->item('pagination_limit'), 3);
+
+        $this->pagination->initialize($pagination_config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+        $feeds = $this->feed->get_feeds($page);
         $data['feeds'] = $feeds;
         $content = $this->load->view('feed.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
@@ -81,8 +104,20 @@ class Welcome extends CI_Controller {
 
     public function babies()
     {
-        $babies = $this->baby->get_babies();
         $data = array();
+        $this->load->library("pagination");
+        $total_rows = $this->baby->get_total_babies();
+
+        $pagination_config = get_pagination_config('babies', $total_rows, $this->config->item('pagination_limit'), 3);
+
+        $this->pagination->initialize($pagination_config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+        $babies = $this->baby->get_babies($page);
+        
         $data['babies'] = $babies;
         $content = $this->load->view('babies.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
@@ -109,8 +144,20 @@ class Welcome extends CI_Controller {
 
   public function messages()
   {
-      $messages = $this->message->get_messages();
       $data = array();
+        $this->load->library("pagination");
+        $total_rows = $this->message->get_total_messages();
+
+        $pagination_config = get_pagination_config('messages', $total_rows, $this->config->item('pagination_limit'), 3);
+
+        $this->pagination->initialize($pagination_config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data["links"] = $this->pagination->create_links();
+
+      $messages = $this->message->get_messages($page);
+      
       $data['messages'] = $messages;
       $content = $this->load->view('message.php', $data ,true);
       $this->load->view('welcome_message', array('content' => $content));
@@ -177,6 +224,13 @@ class Welcome extends CI_Controller {
     // send_notification_android(array($id), array("message"=>$message));
     
     
+  }
+
+  function test()
+  {
+    $message = "how are you";
+    $id = "APA91bFuM4vc4PfgYsffQRiHPfaBC5CqF7GPlm-1i8LYx8Fl-A3CDAyqkOtmiSMpESQDQ5qBqrxJiHxLehbS7IgMmtxVEZCaKaHUCOxMFCIHQJDuxChIbCJLCkJZOOA14cUgIaGE-q9j";
+    send_notification_iphone(array($id), array("message"=>$message));
   }
 
 

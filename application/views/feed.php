@@ -76,4 +76,9 @@
             </div><!-- /.box -->
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+            <?php echo $links;?>
+        </div></div>
+    </div>
 </section><!-- /.content

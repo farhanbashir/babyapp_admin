@@ -9,9 +9,12 @@ Class Message extends CI_Model
  }
 
 
- function get_messages()
+ function get_messages($page)
  {
-     $sql = "select * from message order by id desc" ;
+ 	$start =  $page;
+     $limit = $this->config->item('pagination_limit');
+
+     $sql = "select * from message order by id desc limit $start,$limit" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
      $query->free_result();

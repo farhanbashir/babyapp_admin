@@ -20,17 +20,32 @@ function get_baby_detail($baby_id)
 }
 
 
- function get_babies()
+ function get_babies($page)
+ {
+    $start =  $page;
+     $limit = $this->config->item('pagination_limit');
+     $sql = "select b.*, concat(u.first_name,' ',u.last_name) as parent from babies b 
+            inner join users u on u.user_id=b.user_id
+            #where b.baby_id=59  
+            order by baby_id desc limit $start,$limit" ;
+     $query = $this->db->query($sql);
+     $result = $query->result_array();
+     $query->free_result();
+     return $result;
+ }
+
+ function get_babies_without_pagination()
  {
      $sql = "select b.*, concat(u.first_name,' ',u.last_name) as parent from babies b 
             inner join users u on u.user_id=b.user_id
-            where b.baby_id=59  
+            #where b.baby_id=59  
             order by baby_id desc" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
      $query->free_result();
      return $result;
  }
+
 
  function get_latest_five_babies()
  {

@@ -19,11 +19,14 @@ function get_feed_detail($feed_id)
     return $result[0];
 }
 
- function get_feeds()
+ function get_feeds($page)
  {
+    $start =  $page;
+    $limit = $this->config->item('pagination_limit');
+
      $sql = "select f.*,m.milestone_name from feeds f 
-            inner join milestones m on f.milestone_id=m.milestone_id 
-            order by f.feed_id asc" ;
+            left join milestones m on f.milestone_id=m.milestone_id 
+            order by f.feed_id asc limit $start,$limit" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
      $query->free_result();
@@ -44,8 +47,7 @@ function get_feed_detail($feed_id)
      {
         return false;
      }   
-     
-
+  
  }
 
  function edit_feed($feed_id,$data)

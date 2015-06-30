@@ -15,7 +15,7 @@ class Cron extends CI_Controller {
 
 		$this->load->model('baby','',TRUE);
 		$this->load->model('feed','',TRUE);
-		$babies = $this->baby->get_babies();
+		$babies = $this->baby->get_babies_without_pagination();
 
 		foreach($babies as $baby)
 		{

@@ -45,9 +45,11 @@ function get_admin()
     return $result[0];
 }
 
- function get_users()
+ function get_users($page)
  {
-     $sql = "select * from users where is_admin=0 order by user_id desc" ;
+     $start =  $page;
+     $limit = $this->config->item('pagination_limit');
+     $sql = "select * from users where is_admin=0 order by user_id desc limit $start,$limit" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
      $query->free_result();
