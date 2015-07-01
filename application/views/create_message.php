@@ -27,8 +27,15 @@
                                 <input name="uniqid" id="uniqid" value="<?php echo $uniqid;?>" type="hidden" />
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="end_date">Message</label>
-                                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Enter ..."><?php echo set_value('feed', ''); ?></textarea>
+                                            <label for="end_date">Message English</label>
+                                            <textarea class="form-control" id="message_en" name="message_en" rows="3" placeholder="Enter ..."><?php echo set_value('feed', ''); ?></textarea>
+                                        </div>
+                                    </div><!-- /.box-body -->
+
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="end_date">Message Arabic</label>
+                                            <textarea class="form-control" id="message_ar" name="message_ar" rows="3" placeholder="Enter ..."><?php echo set_value('feed', ''); ?></textarea>
                                         </div>
                                     </div><!-- /.box-body -->
 

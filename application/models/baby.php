@@ -36,9 +36,9 @@ function get_baby_detail($baby_id)
 
  function get_babies_without_pagination()
  {
-     $sql = "select b.*, concat(u.first_name,' ',u.last_name) as parent from babies b 
-            inner join users u on u.user_id=b.user_id
-            #where b.baby_id=59  
+     $sql = "select d.*, b.*, concat(u.first_name,' ',u.last_name) as parent from babies b 
+            inner join users u on u.user_id=b.user_id 
+            inner join devices d on u.user_id=d.user_id  
             order by baby_id desc" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();

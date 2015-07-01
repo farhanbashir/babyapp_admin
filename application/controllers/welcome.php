@@ -171,19 +171,21 @@ class Welcome extends CI_Controller {
         $message = "";
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('message', 'message', 'trim|required');
+        $this->form_validation->set_rules('message_en', 'message', 'trim|required');
+        $this->form_validation->set_rules('message_ar', 'message', 'trim|required');
         
         $data['error'] = "";
         if ($this->form_validation->run())
         {
            // Form was submitted and there were no errors
-           $message = $this->input->post('message');
+           $message_en = $this->input->post('message_en');
+           $message_ar = $this->input->post('message_ar');
            
 
            $uniqid = $this->input->post('uniqid');
            //$service_id = (int) $this->input->post('service_id');
 
-           $params       = array('date'=>date("Y-m-d"),'message'=>$message);
+           $params       = array('date'=>date("Y-m-d"),'message'=>$message_en, 'message_ar'=>$message_ar);
 
           $message_id = $this->message->create_message($params);
 
@@ -192,11 +194,13 @@ class Welcome extends CI_Controller {
           {
             if($device['type'] == 0)
             {
+              $message = ($device["lang"] == 0) ? $message_en : $message_ar;
               send_notification_iphone($device['uid'], $message);
               
             } 
             else
             {
+              $message = ($device["lang"] == 0) ? $message_en : $message_ar;
               send_notification_android($device['uid'], $message);
             } 
           }  

@@ -33,7 +33,8 @@
                     <table class="table table-hover">
                         <tr>
                             <th>Date</th>
-                            <th>Message</th>
+                            <th>Message English</th>
+                            <th>Message Arabic</th>
                         </tr>
                         <?php
                         foreach($messages as $message)
@@ -42,6 +43,7 @@
                         <tr>
                             <td><?php echo date("F j, Y",strtotime($message['date']));?></td>
                             <td><?php echo $message['message'];?></td>
+                            <td><?php echo $message['message_ar'];?></td>
                         </tr>
                         <?php
                         }

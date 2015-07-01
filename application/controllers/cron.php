@@ -36,12 +36,14 @@ class Cron extends CI_Controller {
 					//send notification
 					if($baby['type'] == 0)
 		            {
-		              send_notification_iphone($baby['uid'], $feed['feed']);
+		              $message = ($baby["lang"] == 0) ? $feed['feed'] : $feed['feed_ar'];	
+		              send_notification_iphone($baby['uid'], $message);
 		              
 		            } 
 		            else
 		            {
-		              send_notification_android($baby['uid'], $feed['feed']);
+		              $message = ($baby["lang"] == 0) ? $feed['feed'] : $feed['feed_ar'];	
+		              send_notification_android($baby['uid'], $message);
 		            }	
 				}	
 				
