@@ -11,7 +11,7 @@ Class Device extends CI_Model
 
  function get_devices()
  {
-     $sql = "select * from devices" ;
+     $sql = "select * from devices  where uid!=''" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
      $query->free_result();

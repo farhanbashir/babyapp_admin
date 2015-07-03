@@ -38,7 +38,8 @@ function get_baby_detail($baby_id)
  {
      $sql = "select d.*, b.*, concat(u.first_name,' ',u.last_name) as parent from babies b 
             inner join users u on u.user_id=b.user_id 
-            inner join devices d on u.user_id=d.user_id  
+            inner join devices d on u.user_id=d.user_id 
+            where d.uid!='' 
             order by baby_id desc" ;
      $query = $this->db->query($sql);
      $result = $query->result_array();
