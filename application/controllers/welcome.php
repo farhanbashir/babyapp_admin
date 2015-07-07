@@ -195,7 +195,8 @@ class Welcome extends CI_Controller {
             if($device['type'] == 0)
             {
               $message = ($device["lang"] == 0) ? $message_en : $message_ar;
-              send_notification_iphone($device['uid'], $message);
+              $file_url = ($device["lang"] == 0) ? asset_url("files/".$this->config->item('pem_en')) : asset_url("files/".$this->config->item('pem_en'));
+              send_notification_iphone($device['uid'], $message, $file_url);
               
             } 
             else

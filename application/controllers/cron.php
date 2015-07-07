@@ -37,7 +37,8 @@ class Cron extends CI_Controller {
 					if($baby['type'] == 0)
 		            {
 		              $message = ($baby["lang"] == 0) ? $feed['feed'] : $feed['feed_ar'];	
-		              send_notification_iphone($baby['uid'], $message);
+		              $file_url = ($baby["lang"] == 0) ? asset_url("files/".$this->config->item('pem_en')) : asset_url("files/".$this->config->item('pem_en'));
+		              send_notification_iphone($baby['uid'], $message, $file_url);
 		              
 		            } 
 		            else
