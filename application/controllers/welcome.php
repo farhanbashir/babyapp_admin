@@ -187,24 +187,47 @@ class Welcome extends CI_Controller {
 
            $params       = array('date'=>date("Y-m-d"),'message'=>$message_en, 'message_ar'=>$message_ar);
 
-          $message_id = $this->message->create_message($params);
+          //$message_id = $this->message->create_message($params);
 
+          $android_ids = array();  
+          //$iphone_ids = array();  
           $devices = $this->device->get_devices();
           foreach($devices as $device)
           {
             if($device['type'] == 0)
             {
+              //$iphone_ids[$device["lang"]][] = $device['uid'];
               $message = ($device["lang"] == 0) ? $message_en : $message_ar;
-              $file_url = ($device["lang"] == 0) ? asset_url("files/".$this->config->item('pem_en')) : asset_url("files/".$this->config->item('pem_en'));
+              $file_url = ($device["lang"] == 0) ? asset_url("files/".$this->config->item('pem_en')) : asset_url("files/".$this->config->item('pem_ar'));
               send_notification_iphone($device['uid'], $message, $file_url);
               
             } 
             else
             {
-              $message = ($device["lang"] == 0) ? $message_en : $message_ar;
-              send_notification_android($device['uid'], $message);
+              $android_ids[$device["lang"]][] = $device['uid'];
+              //$message = ($device["lang"] == 0) ? $message_en : $message_ar;
+              //send_notification_android($device['uid'], $message);
             } 
           }  
+
+          if(count($android_ids[0]) > 0)
+          {
+            send_notification_android($android_ids[0], $message_en);
+          }
+          if(count($android_ids[1]) > 0)
+          {
+            send_notification_android($android_ids[1], $message_ar);
+          }
+          // if(count($android_ids[0]) > 0)
+          // {
+          //   $file_url = asset_url("files/".$this->config->item('pem_en'));
+          //   send_notification_iphone($iphone_ids[0], $message_en, $file_url);
+          // }
+          // if(count($android_ids[1]) > 0)
+          // {
+          //   $file_url = asset_url("files/".$this->config->item('pem_ar'));
+          //   send_notification_iphone($iphone_ids[0], $message_ar, $file_url);
+          // }  
 
           redirect(base_url().'index.php/welcome/messages');
 
