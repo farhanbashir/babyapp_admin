@@ -187,7 +187,7 @@ class Welcome extends CI_Controller {
 
            $params       = array('date'=>date("Y-m-d"),'message'=>$message_en, 'message_ar'=>$message_ar);
 
-          //$message_id = $this->message->create_message($params);
+          $message_id = $this->message->create_message($params);
 
           $android_ids = array();  
           //$iphone_ids = array();  
